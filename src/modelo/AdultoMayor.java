@@ -2,6 +2,8 @@ package modelo;
 
 import java.util.Date;
 
+import static utils.Validadores.validarRUT;
+
 public class AdultoMayor {
     private String rut;
     private String nombreAdultoMayor;
@@ -21,10 +23,16 @@ public class AdultoMayor {
     }
 
     public void setRut(String rut) {
+        if(!validarRUT(rut)){
+            throw new IllegalArgumentException("RUT invalido");
+        }
         this.rut = rut;
     }
 
     public void setNombreAdultoMayor(String nombreAdultoMayor) {
+        if(nombreAdultoMayor == null || nombreAdultoMayor.isEmpty()){
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
+        }
         this.nombreAdultoMayor = nombreAdultoMayor;
     }
 
@@ -33,10 +41,16 @@ public class AdultoMayor {
     }
 
     public void setNombreEncargado(String nombreEncargado) {
+        if(nombreEncargado == null || nombreEncargado.isEmpty()){
+            throw new IllegalArgumentException("El nombre no puede estar vacio");
+        }
         this.nombreEncargado = nombreEncargado;
     }
 
     public void setContactoEncargado(String contactoEncargado) {
+        if(contactoEncargado == null || contactoEncargado.isEmpty()){
+            throw new IllegalArgumentException("El contacto no puede estar vacio");
+        }
         this.contactoEncargado = contactoEncargado;
     }
 
