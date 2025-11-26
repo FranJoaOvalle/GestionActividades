@@ -18,6 +18,16 @@ public class GestionAdultosMayores {
         return null;
     }
 
+    public ArrayList<AdultoMayor> buscarAdultoMayorPorNombreEncargado(String nombre){
+        ArrayList<AdultoMayor> listado = new ArrayList<>();
+        for(AdultoMayor a: adultosMayores){
+            if(a.getNombreEncargado().equalsIgnoreCase(nombre)){
+                listado.add(a);
+            }
+        }
+        return listado;
+    }
+
     public AdultoMayor buscarAdultoMayorPorNombre(String nombre){
         for(AdultoMayor a: adultosMayores){
             if(a.getNombreAdultoMayor().equalsIgnoreCase(nombre)){
