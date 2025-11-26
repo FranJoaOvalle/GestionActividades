@@ -31,14 +31,23 @@ public class Actividad
     }
 
     public void setIdActividad(int idActividad) {
+        if(idActividad < 0){
+            throw new IllegalArgumentException("El ID de la actividad no puede ser negativo.");
+        }
         this.idActividad = idActividad;
     }
 
     public void setNombreActividad(String nombreActividad) {
+        if(nombreActividad == null || nombreActividad.isEmpty()){
+            throw new IllegalArgumentException("El nombre de la actividad no puede estar vacio.");
+        }
         this.nombreActividad = nombreActividad;
     }
 
     public void setDescripcion(String descripcion) {
+        if(descripcion == null || descripcion.isEmpty()){
+            throw new IllegalArgumentException("La descripcion no puede estar vacia.");
+        }
         this.descripcion = descripcion;
     }
 
@@ -55,10 +64,16 @@ public class Actividad
     }
 
     public void setCupos(int cupos) {
+        if(cupos < 0){
+            throw new IllegalArgumentException("Los cupos no pueden ser negativos.");
+        }
         this.cupos = cupos;
     }
 
     public void setNombreProfesor(String nombreProfesor) {
+        if(nombreProfesor == null || nombreProfesor.isEmpty()){
+            throw new IllegalArgumentException("El nombre del profesor no puede estar vacio.");
+        }
         this.nombreProfesor = nombreProfesor;
     }
 
