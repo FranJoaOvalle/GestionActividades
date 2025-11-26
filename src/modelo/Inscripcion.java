@@ -15,6 +15,9 @@ public class Inscripcion {
     }
 
     public void setIdInscripcion(int idInscripcion) {
+        if(idInscripcion < 0){
+            throw new IllegalArgumentException("el id de inscripcion no puede ser negativo.");
+        }
         this.idInscripcion = idInscripcion;
     }
 
