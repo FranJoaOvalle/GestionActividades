@@ -28,13 +28,14 @@ public class GestionAdultosMayores {
         return listado;
     }
 
-    public AdultoMayor buscarAdultoMayorPorNombre(String nombre){
+    public ArrayList<AdultoMayor> buscarAdultoMayorPorNombre(String nombre){
+        ArrayList<AdultoMayor> lista = new ArrayList<>();
         for(AdultoMayor a: adultosMayores){
             if(a.getNombreAdultoMayor().equalsIgnoreCase(nombre)){
-                return a;
+                lista.add(a);
             }
         }
-        return null;
+        return lista;
     }
 
     public boolean agregarAdultoMayor(AdultoMayor adultoMayor){
