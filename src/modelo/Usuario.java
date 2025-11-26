@@ -17,14 +17,23 @@ public class Usuario {
     }
 
     public void setIdUsuario(int idUsuario) {
+        if(idUsuario < 0){
+            throw new IllegalArgumentException("El id del usuario no debe ser negativo.");
+        }
         this.idUsuario = idUsuario;
     }
 
     public void setNombreUsuario(String nombreUsuario) {
+        if(nombreUsuario == null || nombreUsuario.isEmpty()){
+            throw new IllegalArgumentException("El nombre no debe ser vacio.");
+        }
         this.nombreUsuario = nombreUsuario;
     }
 
     public void setUsername(String username) {
+        if(username == null || username.isEmpty()){
+            throw new IllegalArgumentException("El username no debe ser vacio.");
+        }
         this.username = username;
     }
 
