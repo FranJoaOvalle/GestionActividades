@@ -18,6 +18,15 @@ public class GestionAdultosMayores {
         return null;
     }
 
+    public AdultoMayor buscarAdultoMayorPorNombre(String nombre){
+        for(AdultoMayor a: adultosMayores){
+            if(a.getNombreAdultoMayor().equalsIgnoreCase(nombre)){
+                return a;
+            }
+        }
+        return null;
+    }
+
     public boolean agregarAdultoMayor(AdultoMayor adultoMayor){
         if(buscarAdultoMayorPorRut(adultoMayor.getRut()) != null){
             return false;

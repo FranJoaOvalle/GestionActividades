@@ -18,6 +18,26 @@ public class GestionInscripcion {
         return null;
     }
 
+    public ArrayList<Inscripcion> buscarInscripcionPorAdultoMayor(AdultoMayor adulto){
+        ArrayList<Inscripcion> listado = new ArrayList<>();
+        for(Inscripcion i: inscripciones){
+            if(i.getAdultoMayor().getRut().equalsIgnoreCase(adulto.getRut())){
+                listado.add(i);
+            }
+        }
+        return listado;
+    }
+
+    public ArrayList<Inscripcion> buscarInscripcionPorActividad(Actividad act){
+        ArrayList<Inscripcion> lista = new ArrayList<>();
+        for(Inscripcion i: inscripciones){
+            if(i.getActividad().getIdActividad() == act.getIdActividad()){
+                lista.add(i);
+            }
+        }
+        return lista;
+    }
+
     public boolean agregarInscripcion(Inscripcion inscripcion){
         if(buscarInscripcionPorId(inscripcion.getIdInscripcion()) != null){
             return false;
