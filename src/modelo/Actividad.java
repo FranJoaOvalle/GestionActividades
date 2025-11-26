@@ -32,7 +32,7 @@ public class Actividad
 
     public void setIdActividad(int idActividad) {
         if(idActividad < 0){
-            throw new IllegalArgumentException("El ID de la actividad no puede ser negativo.");
+            throw new IllegalArgumentException("El id de la actividad no puede ser negativo.");
         }
         this.idActividad = idActividad;
     }
