@@ -100,6 +100,22 @@ public class GestionActividades {
         return eliminado;
     }
 
+    public boolean eliminarActicidadPorDia(DayOfWeek dia){
+        boolean eliminado = false;
+
+        Iterator<Actividad> it = actividades.iterator();
+
+        while(it.hasNext()){
+            Actividad a = it.next();
+
+            if(a.getDia() == dia){
+                it.remove();
+                eliminado = true;
+            }
+        }
+        return eliminado;
+    }
+
     public boolean actualizarActividad(Actividad antiguosDatos, Actividad nuevosDatos){
         for(Actividad a: actividades){
             if(a.getIdActividad() == antiguosDatos.getIdActividad()){
