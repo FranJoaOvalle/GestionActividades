@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class GestionAdultosMayores {
     private ArrayList<AdultoMayor> adultosMayores;
@@ -53,6 +54,64 @@ public class GestionAdultosMayores {
         }
         adultosMayores.remove(a);
         return true;
+    }
+
+    public boolean actualizarAdultoMayor(AdultoMayor antiguosDatos, AdultoMayor nuevosDatos){
+        for(AdultoMayor a: adultosMayores){
+            if(a.getRut().equalsIgnoreCase(antiguosDatos.getRut())){
+                a.setNombreAdultoMayor(nuevosDatos.getNombreAdultoMayor());
+                a.setNacimiento(nuevosDatos.getNacimiento());
+                a.setNombreEncargado(nuevosDatos.getNombreEncargado());
+                a.setContactoEncargado(nuevosDatos.getContactoEncargado());
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean actualizarNombreAdultoMayor(AdultoMayor adulto, String nombre){
+        for(AdultoMayor a: adultosMayores){
+            if(a.getRut().equalsIgnoreCase(adulto.getRut())){
+                a.setNombreAdultoMayor(nombre);
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean actualizarNacimientoAdultoMayor(AdultoMayor adulto, Date nacimiento){
+        for(AdultoMayor a: adultosMayores){
+            if(a.getRut().equalsIgnoreCase(adulto.getRut())){
+                a.setNacimiento(nacimiento);
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean actualizarNombreEncargadoAdultoMayor(AdultoMayor adulto, String nombreEncargado){
+        for(AdultoMayor a: adultosMayores){
+            if(a.getRut().equalsIgnoreCase(adulto.getRut())){
+                a.setNombreEncargado(nombreEncargado);
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean actualizarContactoEncargado(AdultoMayor adulto, String contactoEncargado){
+        for(AdultoMayor a: adultosMayores){
+            if(a.getRut().equalsIgnoreCase(adulto.getRut())){
+                a.setContactoEncargado(contactoEncargado);
+            }
+
+            return true;
+        }
+        return false;
     }
 
     public ArrayList<AdultoMayor> getAdultosMayores() {
