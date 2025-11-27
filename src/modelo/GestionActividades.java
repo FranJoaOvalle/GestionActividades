@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GestionActividades {
     private ArrayList<Actividad> actividades;
@@ -53,6 +54,38 @@ public class GestionActividades {
         }
         actividades.remove(a);
         return true;
+    }
+
+    public boolean eliminarActividadPorProfesor(String nombreProfesor){
+        boolean eliminado = false;
+
+        Iterator<Actividad> it = actividades.iterator();
+
+        while(it.hasNext()){
+            Actividad a = it.next();
+
+            if(a.getNombreProfesor().equalsIgnoreCase(nombreProfesor)){
+                it.remove();
+                eliminado = true;
+            }
+        }
+        return eliminado;
+    }
+
+    public boolean eliminarActividadPorNombreActividad(String nombreActividad){
+        boolean eliminado = false;
+
+        Iterator<Actividad> it = actividades.iterator();
+
+        while(it.hasNext()){
+            Actividad a = it.next();
+
+            if(a.getNombreActividad().equalsIgnoreCase(nombreActividad)){
+                it.remove();
+                eliminado = true;
+            }
+        }
+        return eliminado;
     }
 
     public ArrayList<Actividad> getActividades() {
