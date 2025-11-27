@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class GestionInscripcion {
     private ArrayList<Inscripcion> inscripciones;
@@ -53,6 +54,38 @@ public class GestionInscripcion {
         }
         inscripciones.remove(i);
         return true;
+    }
+
+    public boolean eliminarInscripcionPorAdultoMayor(AdultoMayor adulto){
+        boolean eliminado = false;
+
+        Iterator<Inscripcion> it = inscripciones.iterator();
+
+        while(it.hasNext()){
+            Inscripcion i = it.next();
+
+            if(i.getAdultoMayor().getRut().equalsIgnoreCase(adulto.getRut())){
+                it.remove();
+                eliminado = true;
+            }
+        }
+        return eliminado;
+    }
+
+    public boolean eliminarInscripcionPorActividad(Actividad actividad){
+        boolean eliminado = false;
+
+        Iterator<Inscripcion> it = inscripciones.iterator();
+
+        while(it.hasNext()){
+            Inscripcion i = it.next();
+
+            if(i.getActividad().getIdActividad() == actividad.getIdActividad()){
+                it.remove();
+                eliminado = true;
+            }
+        }
+        return eliminado;
     }
 
     public ArrayList<Inscripcion> getInscripciones() {
