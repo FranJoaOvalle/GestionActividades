@@ -41,6 +41,16 @@ public class GestionActividades {
         return lista;
     }
 
+    public ArrayList<Actividad> buscarActividadPorDia(DayOfWeek dia){
+        ArrayList<Actividad> lista = new ArrayList<>();
+        for(Actividad a: actividades){
+            if(a.getDia() == dia){
+                lista.add(a);
+            }
+        }
+        return lista;
+    }
+
     public boolean agregarActividad(Actividad actividad){
         if(buscarActividadPorId(actividad.getIdActividad()) != null){
             return false;
