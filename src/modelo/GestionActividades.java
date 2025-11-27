@@ -18,6 +18,26 @@ public class GestionActividades {
         return null;
     }
 
+    public ArrayList<Actividad> buscarActividadPorNombre(String nombre){
+        ArrayList<Actividad> listado = new ArrayList<>();
+        for(Actividad a: actividades){
+            if(a.getNombreActividad().equalsIgnoreCase(nombre)){
+                listado.add(a);
+            }
+        }
+        return listado;
+    }
+
+    public ArrayList<Actividad> buscarActividadPorNombreProfesor(String nombreProfesor){
+        ArrayList<Actividad> lista = new ArrayList<>();
+        for(Actividad a: actividades){
+            if(a.getNombreProfesor().equalsIgnoreCase(nombreProfesor)){
+                lista.add(a);
+            }
+        }
+        return lista;
+    }
+
     public boolean agregarActividad(Actividad actividad){
         if(buscarActividadPorId(actividad.getIdActividad()) != null){
             return false;
