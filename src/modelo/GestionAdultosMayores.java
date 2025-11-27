@@ -103,7 +103,7 @@ public class GestionAdultosMayores {
         return false;
     }
 
-    public boolean actualizarContactoEncargado(AdultoMayor adulto, String contactoEncargado){
+    public boolean actualizarContactoEncargadoAdultoMayor(AdultoMayor adulto, String contactoEncargado){
         for(AdultoMayor a: adultosMayores){
             if(a.getRut().equalsIgnoreCase(adulto.getRut())){
                 a.setContactoEncargado(contactoEncargado);
