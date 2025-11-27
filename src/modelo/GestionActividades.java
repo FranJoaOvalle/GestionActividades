@@ -100,7 +100,7 @@ public class GestionActividades {
         return eliminado;
     }
 
-    public boolean eliminarActicidadPorDia(DayOfWeek dia){
+    public boolean eliminarActividadPorDia(DayOfWeek dia){
         boolean eliminado = false;
 
         Iterator<Actividad> it = actividades.iterator();
