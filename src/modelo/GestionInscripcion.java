@@ -40,9 +40,24 @@ public class GestionInscripcion {
     }
 
     public boolean agregarInscripcion(Inscripcion inscripcion){
+        if(inscripcion == null){
+            return false;
+        }
+
         if(buscarInscripcionPorId(inscripcion.getIdInscripcion()) != null){
             return false;
         }
+
+        Actividad actividad = inscripcion.getActividad();
+
+        if(!actividad.tieneCupos()){
+            return false;
+        }
+
+        if(!actividad.descontarCupo()){
+            return false;
+        }
+
         inscripciones.add(inscripcion);
         return true;
     }

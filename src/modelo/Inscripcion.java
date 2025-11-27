@@ -22,10 +22,16 @@ public class Inscripcion {
     }
 
     public void setAdultoMayor(AdultoMayor adultoMayor) {
+        if(adultoMayor == null){
+            throw new IllegalArgumentException("el adulto mayor no puede ser nulo.");
+        }
         this.adultoMayor = adultoMayor;
     }
 
     public void setActividad(Actividad actividad) {
+        if(actividad == null){
+            throw new IllegalArgumentException("la actividad no puede ser nulo.");
+        }
         this.actividad = actividad;
     }
 

@@ -108,4 +108,20 @@ public class Actividad
     public String getNombreProfesor() {
         return nombreProfesor;
     }
+
+    public boolean tieneCupos(){
+        if(cupos > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public boolean descontarCupo(){
+        if(cupos > 0){
+            cupos = cupos - 1;
+            return true;
+        }
+        return false;
+    }
 }
