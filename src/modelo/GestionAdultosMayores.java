@@ -11,6 +11,10 @@ public class GestionAdultosMayores {
     }
 
     public AdultoMayor buscarAdultoMayorPorRut(String rut){
+        if(rut == null){
+            return null;
+        }
+
         for(AdultoMayor a: adultosMayores){
             if(a.getRut().equalsIgnoreCase(rut)){
                 return a;
@@ -21,6 +25,11 @@ public class GestionAdultosMayores {
 
     public ArrayList<AdultoMayor> buscarAdultoMayorPorNombreEncargado(String nombre){
         ArrayList<AdultoMayor> listado = new ArrayList<>();
+
+        if(nombre == null){
+            return listado;
+        }
+
         for(AdultoMayor a: adultosMayores){
             if(a.getNombreEncargado().equalsIgnoreCase(nombre)){
                 listado.add(a);
@@ -31,6 +40,11 @@ public class GestionAdultosMayores {
 
     public ArrayList<AdultoMayor> buscarAdultoMayorPorNombre(String nombre){
         ArrayList<AdultoMayor> lista = new ArrayList<>();
+
+        if(nombre == null){
+            return lista;
+        }
+
         for(AdultoMayor a: adultosMayores){
             if(a.getNombreAdultoMayor().equalsIgnoreCase(nombre)){
                 lista.add(a);
@@ -40,6 +54,9 @@ public class GestionAdultosMayores {
     }
 
     public boolean agregarAdultoMayor(AdultoMayor adultoMayor){
+        if(adultoMayor == null){
+            return false;
+        }
         if(buscarAdultoMayorPorRut(adultoMayor.getRut()) != null){
             return false;
         }
@@ -48,7 +65,12 @@ public class GestionAdultosMayores {
     }
 
     public boolean eliminarAdultoMayor(AdultoMayor adultoMayor){
+        if(adultoMayor == null){
+            return false;
+        }
+
         AdultoMayor a = buscarAdultoMayorPorRut(adultoMayor.getRut());
+
         if(a == null){
             return false;
         }
@@ -57,6 +79,10 @@ public class GestionAdultosMayores {
     }
 
     public boolean actualizarAdultoMayor(AdultoMayor antiguosDatos, AdultoMayor nuevosDatos){
+        if(antiguosDatos == null || nuevosDatos == null){
+            return false;
+        }
+
         for(AdultoMayor a: adultosMayores){
             if(a.getRut().equalsIgnoreCase(antiguosDatos.getRut())){
                 a.setNombreAdultoMayor(nuevosDatos.getNombreAdultoMayor());
@@ -71,6 +97,10 @@ public class GestionAdultosMayores {
     }
 
     public boolean actualizarNombreAdultoMayor(AdultoMayor adulto, String nombre){
+        if(adulto == null || nombre == null){
+            return false;
+        }
+
         for(AdultoMayor a: adultosMayores){
             if(a.getRut().equalsIgnoreCase(adulto.getRut())){
                 a.setNombreAdultoMayor(nombre);
@@ -82,6 +112,10 @@ public class GestionAdultosMayores {
     }
 
     public boolean actualizarNacimientoAdultoMayor(AdultoMayor adulto, Date nacimiento){
+        if(adulto == null){
+            return false;
+        }
+
         for(AdultoMayor a: adultosMayores){
             if(a.getRut().equalsIgnoreCase(adulto.getRut())){
                 a.setNacimiento(nacimiento);
@@ -93,6 +127,10 @@ public class GestionAdultosMayores {
     }
 
     public boolean actualizarNombreEncargadoAdultoMayor(AdultoMayor adulto, String nombreEncargado){
+        if(adulto == null || nombreEncargado == null){
+            return false;
+        }
+
         for(AdultoMayor a: adultosMayores){
             if(a.getRut().equalsIgnoreCase(adulto.getRut())){
                 a.setNombreEncargado(nombreEncargado);
@@ -104,6 +142,10 @@ public class GestionAdultosMayores {
     }
 
     public boolean actualizarContactoEncargadoAdultoMayor(AdultoMayor adulto, String contactoEncargado){
+        if(adulto == null || contactoEncargado == null){
+            return false;
+        }
+
         for(AdultoMayor a: adultosMayores){
             if(a.getRut().equalsIgnoreCase(adulto.getRut())){
                 a.setContactoEncargado(contactoEncargado);
