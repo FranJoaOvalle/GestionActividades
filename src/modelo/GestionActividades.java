@@ -13,6 +13,9 @@ public class GestionActividades {
     }
 
     public Actividad buscarActividadPorId(int id){
+        if(id < 0){
+            return null;
+        }
         for(Actividad a: actividades){
             if(a.getIdActividad() == id){
                 return a;
@@ -23,6 +26,11 @@ public class GestionActividades {
 
     public ArrayList<Actividad> buscarActividadPorNombre(String nombre){
         ArrayList<Actividad> listado = new ArrayList<>();
+
+        if(nombre == null){
+            return listado;
+        }
+
         for(Actividad a: actividades){
             if(a.getNombreActividad().equalsIgnoreCase(nombre)){
                 listado.add(a);
@@ -33,6 +41,11 @@ public class GestionActividades {
 
     public ArrayList<Actividad> buscarActividadPorNombreProfesor(String nombreProfesor){
         ArrayList<Actividad> lista = new ArrayList<>();
+
+        if(nombreProfesor == null){
+            return lista;
+        }
+
         for(Actividad a: actividades){
             if(a.getNombreProfesor().equalsIgnoreCase(nombreProfesor)){
                 lista.add(a);
@@ -52,6 +65,9 @@ public class GestionActividades {
     }
 
     public boolean agregarActividad(Actividad actividad){
+        if(actividad == null){
+            return false;
+        }
         if(buscarActividadPorId(actividad.getIdActividad()) != null){
             return false;
         }
@@ -60,7 +76,12 @@ public class GestionActividades {
     }
 
     public boolean eliminarActividad(Actividad actividad){
+        if(actividad == null){
+            return false;
+        }
+
         Actividad a = buscarActividadPorId(actividad.getIdActividad());
+
         if(a == null){
             return false;
         }
@@ -69,6 +90,10 @@ public class GestionActividades {
     }
 
     public boolean eliminarActividadPorProfesor(String nombreProfesor){
+        if(nombreProfesor == null){
+            return false;
+        }
+
         boolean eliminado = false;
 
         Iterator<Actividad> it = actividades.iterator();
@@ -85,6 +110,10 @@ public class GestionActividades {
     }
 
     public boolean eliminarActividadPorNombreActividad(String nombreActividad){
+        if(nombreActividad == null){
+            return false;
+        }
+
         boolean eliminado = false;
 
         Iterator<Actividad> it = actividades.iterator();
@@ -117,6 +146,10 @@ public class GestionActividades {
     }
 
     public boolean actualizarActividad(Actividad antiguosDatos, Actividad nuevosDatos){
+        if(antiguosDatos == null || nuevosDatos == null){
+            return false;
+        }
+
         for(Actividad a: actividades){
             if(a.getIdActividad() == antiguosDatos.getIdActividad()){
                 a.setNombreActividad(nuevosDatos.getNombreActividad());
@@ -134,6 +167,10 @@ public class GestionActividades {
     }
 
     public boolean actualizarNombreActividad(Actividad actividad, String nombre){
+        if(actividad == null || nombre == null){
+            return false;
+        }
+
         for(Actividad a: actividades){
             if(a.getIdActividad() == actividad.getIdActividad()){
                 a.setNombreActividad(nombre);
@@ -145,6 +182,10 @@ public class GestionActividades {
     }
 
     public boolean actualizarDescripcionActividad(Actividad actividad, String descripcion){
+        if(actividad == null || descripcion == null){
+            return false;
+        }
+
         for(Actividad a: actividades){
             if(a.getIdActividad() == actividad.getIdActividad()){
                 a.setDescripcion(descripcion);
@@ -156,6 +197,10 @@ public class GestionActividades {
     }
 
     public boolean actualizarDiaActividad(Actividad actividad, DayOfWeek dia){
+        if(actividad == null){
+            return false;
+        }
+
         for(Actividad a: actividades){
             if(a.getIdActividad() == actividad.getIdActividad()){
                 a.setDia(dia);
@@ -167,6 +212,10 @@ public class GestionActividades {
     }
 
     public boolean actualizarHoraInicioActividad(Actividad actividad, LocalTime horaInicio){
+        if(actividad == null){
+            return false;
+        }
+
         for(Actividad a: actividades){
             if(a.getIdActividad() == actividad.getIdActividad()){
                 a.setHoraInicio(horaInicio);
@@ -178,6 +227,10 @@ public class GestionActividades {
     }
 
     public boolean actualizarHoraFinActividad(Actividad actividad, LocalTime horaFin){
+        if(actividad == null){
+            return false;
+        }
+
         for(Actividad a: actividades){
             if(a.getIdActividad() == actividad.getIdActividad()){
                 a.setHoraFin(horaFin);
@@ -189,6 +242,10 @@ public class GestionActividades {
     }
 
     public boolean actualizarCupos(Actividad actividad, int cupos){
+        if(actividad == null || cupos < 0){
+            return false;
+        }
+
         for(Actividad a: actividades){
             if(a.getIdActividad() == actividad.getIdActividad()){
                 a.setCupos(cupos);
@@ -200,6 +257,10 @@ public class GestionActividades {
     }
 
     public boolean actualizarNombreProfesor(Actividad actividad, String nombreProfesor){
+        if(actividad == null || nombreProfesor == null){
+            return false;
+        }
+
         for(Actividad a: actividades){
             if(a.getIdActividad() == actividad.getIdActividad()){
                 a.setNombreProfesor(nombreProfesor);
