@@ -11,6 +11,10 @@ public class GestionInscripcion {
     }
 
     public Inscripcion buscarInscripcionPorId(int id){
+        if(id < 0){
+            return null;
+        }
+
         for(Inscripcion i: inscripciones){
             if(i.getIdInscripcion() == id){
                 return i;
@@ -21,6 +25,11 @@ public class GestionInscripcion {
 
     public ArrayList<Inscripcion> buscarInscripcionPorAdultoMayor(AdultoMayor adulto){
         ArrayList<Inscripcion> listado = new ArrayList<>();
+
+        if(adulto == null){
+            return listado;
+        }
+
         for(Inscripcion i: inscripciones){
             if(i.getAdultoMayor().getRut().equalsIgnoreCase(adulto.getRut())){
                 listado.add(i);
@@ -31,6 +40,11 @@ public class GestionInscripcion {
 
     public ArrayList<Inscripcion> buscarInscripcionPorActividad(Actividad act){
         ArrayList<Inscripcion> lista = new ArrayList<>();
+
+        if(act == null){
+            return lista;
+        }
+
         for(Inscripcion i: inscripciones){
             if(i.getActividad().getIdActividad() == act.getIdActividad()){
                 lista.add(i);
@@ -39,16 +53,27 @@ public class GestionInscripcion {
         return lista;
     }
 
-    public boolean agregarInscripcion(Inscripcion inscripcion){
-        if(inscripcion == null){
+    public boolean agregarInscripcion(Inscripcion inscripcion, GestionAdultosMayores gestionAdultosMayores,
+                                      GestionActividades gestionActividades){
+
+        if(inscripcion == null || gestionAdultosMayores == null || gestionActividades == null){
+            return false;
+        }
+
+        AdultoMayor adulto = inscripcion.getAdultoMayor();
+        Actividad actividad = inscripcion.getActividad();
+
+        if(gestionAdultosMayores.buscarAdultoMayorPorRut(adulto.getRut()) == null){
+            return false;
+        }
+
+        if(gestionActividades.buscarActividadPorId(actividad.getIdActividad()) == null){
             return false;
         }
 
         if(buscarInscripcionPorId(inscripcion.getIdInscripcion()) != null){
             return false;
         }
-
-        Actividad actividad = inscripcion.getActividad();
 
         if(!actividad.tieneCupos()){
             return false;
@@ -63,15 +88,29 @@ public class GestionInscripcion {
     }
 
     public boolean eliminarInscripcion(Inscripcion inscripcion){
+        if(inscripcion == null){
+            return false;
+        }
+
         Inscripcion i = buscarInscripcionPorId(inscripcion.getIdInscripcion());
+
         if(i == null){
             return false;
         }
+
+        Actividad actividad = i.getActividad();
+
+        actividad.aumentarCupo();
+
         inscripciones.remove(i);
         return true;
     }
 
     public boolean eliminarInscripcionPorAdultoMayor(AdultoMayor adulto){
+        if(adulto == null){
+            return false;
+        }
+
         boolean eliminado = false;
 
         Iterator<Inscripcion> it = inscripciones.iterator();
@@ -80,6 +119,8 @@ public class GestionInscripcion {
             Inscripcion i = it.next();
 
             if(i.getAdultoMayor().getRut().equalsIgnoreCase(adulto.getRut())){
+                Actividad actividad = i.getActividad();
+                actividad.aumentarCupo();
                 it.remove();
                 eliminado = true;
             }
@@ -88,6 +129,10 @@ public class GestionInscripcion {
     }
 
     public boolean eliminarInscripcionPorActividad(Actividad actividad){
+        if(actividad == null){
+            return false;
+        }
+
         boolean eliminado = false;
 
         Iterator<Inscripcion> it = inscripciones.iterator();
@@ -96,6 +141,8 @@ public class GestionInscripcion {
             Inscripcion i = it.next();
 
             if(i.getActividad().getIdActividad() == actividad.getIdActividad()){
+                Actividad act = i.getActividad();
+                act.aumentarCupo();
                 it.remove();
                 eliminado = true;
             }

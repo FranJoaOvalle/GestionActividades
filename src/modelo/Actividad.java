@@ -124,4 +124,8 @@ public class Actividad
         }
         return false;
     }
+
+    public void aumentarCupo(){
+        cupos = cupos + 1;
+    }
 }
