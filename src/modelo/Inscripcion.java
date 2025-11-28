@@ -46,4 +46,5 @@ public class Inscripcion {
     public Actividad getActividad() {
         return actividad;
     }
+
 }
