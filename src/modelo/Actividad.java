@@ -7,6 +7,7 @@ public class Actividad
 {
     private int idActividad;
     private String nombreActividad;
+    private String categoria;
     private String descripcion;
     private DayOfWeek dia;
     private LocalTime horaInicio;
@@ -17,11 +18,12 @@ public class Actividad
     public Actividad() {
     }
 
-    public Actividad(int idActividad, String nombreActividad, String descripcion, DayOfWeek dia, LocalTime horaInicio,
+    public Actividad(int idActividad, String nombreActividad, String Categoria, String descripcion, DayOfWeek dia, LocalTime horaInicio,
                      LocalTime horaFin, int cupos, String nombreProfesor)
     {
         this.setIdActividad(idActividad);
         this.setNombreActividad(nombreActividad);
+        this.setCategoria(Categoria);
         this.setDescripcion(descripcion);
         this.setDia(dia);
         this.setHoraInicio(horaInicio);
@@ -42,6 +44,13 @@ public class Actividad
             throw new IllegalArgumentException("El nombre de la actividad no puede estar vacio.");
         }
         this.nombreActividad = nombreActividad;
+    }
+
+    public void setCategoria(String categoria) {
+        if(categoria == null || categoria.isEmpty()){
+            throw new IllegalArgumentException("La categoria de la actividad no puede estar vacia.");
+        }
+        this.categoria = categoria;
     }
 
     public void setDescripcion(String descripcion) {
@@ -83,6 +92,10 @@ public class Actividad
 
     public String getNombreActividad() {
         return nombreActividad;
+    }
+
+    public String getCategoria() {
+        return categoria;
     }
 
     public String getDescripcion() {

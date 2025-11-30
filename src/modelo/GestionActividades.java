@@ -39,6 +39,21 @@ public class GestionActividades {
         return listado;
     }
 
+    public ArrayList<Actividad> buscarActividadPorCategoria(String categoria){
+        ArrayList<Actividad> listado = new ArrayList<>();
+
+        if(categoria == null){
+            return listado;
+        }
+
+        for(Actividad a: actividades){
+            if(a.getCategoria().equalsIgnoreCase(categoria)){
+                listado.add(a);
+            }
+        }
+        return listado;
+    }
+
     public ArrayList<Actividad> buscarActividadPorNombreProfesor(String nombreProfesor){
         ArrayList<Actividad> lista = new ArrayList<>();
 
@@ -109,6 +124,26 @@ public class GestionActividades {
         return eliminado;
     }
 
+    public boolean eliminarActividadPorCategoria(String categoria){
+        if(categoria == null){
+            return false;
+        }
+
+        boolean eliminado = false;
+
+        Iterator<Actividad> it = actividades.iterator();
+
+        while(it.hasNext()){
+            Actividad a = it.next();
+
+            if(a.getCategoria().equalsIgnoreCase(categoria)){
+                it.remove();
+                eliminado = true;
+            }
+        }
+        return eliminado;
+    }
+
     public boolean eliminarActividadPorNombreActividad(String nombreActividad){
         if(nombreActividad == null){
             return false;
@@ -153,6 +188,7 @@ public class GestionActividades {
         for(Actividad a: actividades){
             if(a.getIdActividad() == antiguosDatos.getIdActividad()){
                 a.setNombreActividad(nuevosDatos.getNombreActividad());
+                a.setCategoria(nuevosDatos.getCategoria());
                 a.setDescripcion(nuevosDatos.getDescripcion());
                 a.setDia(nuevosDatos.getDia());
                 a.setHoraInicio(nuevosDatos.getHoraInicio());
@@ -174,6 +210,21 @@ public class GestionActividades {
         for(Actividad a: actividades){
             if(a.getIdActividad() == actividad.getIdActividad()){
                 a.setNombreActividad(nombre);
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean actualizarCategoriaActividad(Actividad actividad, String categoria){
+        if(actividad == null || categoria == null){
+            return false;
+        }
+
+        for(Actividad a: actividades){
+            if(a.getIdActividad() == actividad.getIdActividad()){
+                a.setCategoria(categoria);
 
                 return true;
             }
