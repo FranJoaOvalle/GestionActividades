@@ -149,9 +149,9 @@ public class GestionAdultosMayores {
         for(AdultoMayor a: adultosMayores){
             if(a.getRut().equalsIgnoreCase(adulto.getRut())){
                 a.setContactoEncargado(contactoEncargado);
-            }
 
-            return true;
+                return true;
+            }
         }
         return false;
     }
