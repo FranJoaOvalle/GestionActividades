@@ -75,6 +75,13 @@ public class GestionInscripcion {
             return false;
         }
 
+        for(Inscripcion i : inscripciones){
+            if(i.getAdultoMayor().getRut().equalsIgnoreCase(adulto.getRut()) &&
+                    i.getActividad().getIdActividad() == actividad.getIdActividad()){
+                return false;
+            }
+        }
+
         if(!actividad.tieneCupos()){
             return false;
         }
