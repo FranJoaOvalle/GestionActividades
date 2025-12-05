@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GestionActividades {
-    private ArrayList<Actividad> actividades;
+    private final ArrayList<Actividad> actividades;
 
     public GestionActividades() {
         this.actividades = new ArrayList<>();

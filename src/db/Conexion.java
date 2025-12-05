@@ -17,6 +17,7 @@ public class Conexion {
     public static Connection getConexion() throws SQLException {
         if (conn == null || conn.isClosed()) {
             conn = DriverManager.getConnection(URL);
+            conn.createStatement().execute("PRAGMA foreign_keys = ON");
         }
         return conn;
     }

@@ -1,17 +1,17 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class GestionAdultosMayores {
-    private ArrayList<AdultoMayor> adultosMayores;
+    private final ArrayList<AdultoMayor> adultosMayores;
 
     public GestionAdultosMayores() {
         this.adultosMayores = new ArrayList<>();
     }
 
     public AdultoMayor buscarAdultoMayorPorRut(String rut){
-        if(rut == null){
+        if(rut == null) {
             return null;
         }
 
@@ -111,7 +111,7 @@ public class GestionAdultosMayores {
         return false;
     }
 
-    public boolean actualizarNacimientoAdultoMayor(AdultoMayor adulto, Date nacimiento){
+    public boolean actualizarNacimientoAdultoMayor(AdultoMayor adulto, LocalDate nacimiento){
         if(adulto == null){
             return false;
         }

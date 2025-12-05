@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GestionInscripcion {
-    private ArrayList<Inscripcion> inscripciones;
+    private final ArrayList<Inscripcion> inscripciones;
 
     public GestionInscripcion() {
         this.inscripciones = new ArrayList<>();

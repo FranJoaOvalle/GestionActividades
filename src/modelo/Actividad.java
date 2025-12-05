@@ -18,12 +18,12 @@ public class Actividad
     public Actividad() {
     }
 
-    public Actividad(int idActividad, String nombreActividad, String Categoria, String descripcion, DayOfWeek dia, LocalTime horaInicio,
+    public Actividad(int idActividad, String nombreActividad, String categoria, String descripcion, DayOfWeek dia, LocalTime horaInicio,
                      LocalTime horaFin, int cupos, String nombreProfesor)
     {
         this.setIdActividad(idActividad);
         this.setNombreActividad(nombreActividad);
-        this.setCategoria(Categoria);
+        this.setCategoria(categoria);
         this.setDescripcion(descripcion);
         this.setDia(dia);
         this.setHoraInicio(horaInicio);
@@ -122,23 +122,19 @@ public class Actividad
         return nombreProfesor;
     }
 
-    public boolean tieneCupos(){
-        if(cupos > 0){
-            return true;
-        }else{
-            return false;
-        }
+    public boolean tieneCupos() {
+        return cupos > 0;
     }
 
-    public boolean descontarCupo(){
-        if(cupos > 0){
-            cupos = cupos - 1;
+    public boolean descontarCupo() {
+        if (cupos > 0) {
+            cupos--;
             return true;
         }
         return false;
     }
 
-    public void aumentarCupo(){
-        cupos = cupos + 1;
+    public void aumentarCupo() {
+        cupos++;
     }
 }

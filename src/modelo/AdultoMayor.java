@@ -1,22 +1,24 @@
 package modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import static utils.Validadores.validarRUT;
 
 public class AdultoMayor {
     private String rut;
     private String nombreAdultoMayor;
-    private Date nacimiento;
+    private String apellidoAdultoMayor;
+    private LocalDate nacimiento;
     private String nombreEncargado;
     private String contactoEncargado;
 
     public AdultoMayor() {
     }
 
-    public AdultoMayor(String rut, String nombreAdultoMayor, Date nacimiento, String nombreEncargado, String contactoEncargado) {
+    public AdultoMayor(String rut, String nombreAdultoMayor, String apellidoAdultoMayor,LocalDate nacimiento, String nombreEncargado, String contactoEncargado) {
         this.setRut(rut);
         this.setNombreAdultoMayor(nombreAdultoMayor);
+        this.setApellidoAdultoMayor(apellidoAdultoMayor);
         this.setNacimiento(nacimiento);
         this.setNombreEncargado(nombreEncargado);
         this.setContactoEncargado(contactoEncargado);
@@ -36,7 +38,14 @@ public class AdultoMayor {
         this.nombreAdultoMayor = nombreAdultoMayor;
     }
 
-    public void setNacimiento(Date nacimiento) {
+    public void setApellidoAdultoMayor(String apellidoAdultoMayor) {
+        if(apellidoAdultoMayor == null || apellidoAdultoMayor.isEmpty()){
+            throw new IllegalArgumentException("El apellido no puede estar vacio.");
+        }
+        this.apellidoAdultoMayor = apellidoAdultoMayor;
+    }
+
+    public void setNacimiento(LocalDate nacimiento) {
         this.nacimiento = nacimiento;
     }
 
@@ -62,7 +71,11 @@ public class AdultoMayor {
         return nombreAdultoMayor;
     }
 
-    public Date getNacimiento() {
+    public String getApellidoAdultoMayor() {
+        return apellidoAdultoMayor;
+    }
+
+    public LocalDate getNacimiento() {
         return nacimiento;
     }
 
