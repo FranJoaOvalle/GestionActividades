@@ -29,6 +29,8 @@ public class Controlador {
         this.gestionInscripcion = gestionInscripcion;
         this.vistaPrincipal = vistaPrincipal;
         configurarSeleccionTabla();
+        vistaPrincipal.btnAdultoEditar.setEnabled(false);
+        vistaPrincipal.btnAdultoEliminar.setEnabled(false);
     }
 
     public void botones(){
@@ -112,6 +114,8 @@ public class Controlador {
         this.vistaPrincipal.txtAdultoFono.setText("");
         this.vistaPrincipal.txtAdultoRut.requestFocus();
         this.vistaPrincipal.btnAdultoGuardar.setEnabled(true);
+        vistaPrincipal.btnAdultoEditar.setEnabled(false);
+        vistaPrincipal.btnAdultoEliminar.setEnabled(false);
     }
 
     private void listarAdultosMayores(ArrayList<AdultoMayor> adultos){
@@ -140,12 +144,15 @@ public class Controlador {
                 rutSeleccionado = vistaPrincipal.tablaAdultos.getValueAt(fila, 0).toString();
 
                 if(e.getClickCount() == 1){
+                    vistaPrincipal.btnAdultoEditar.setEnabled(false);
+                    vistaPrincipal.btnAdultoEliminar.setEnabled(true);
                     return;
                 }
 
                 if(e.getClickCount() == 2) {
                     vistaPrincipal.btnAdultoGuardar.setEnabled(false);
-
+                    vistaPrincipal.btnAdultoEditar.setEnabled(true);
+                    vistaPrincipal.btnAdultoEliminar.setEnabled(true);
                     AdultoMayor adulto = gestionAdultosMayores.buscarAdultoMayorPorRut(rutSeleccionado);
 
                     if(adulto != null) {
