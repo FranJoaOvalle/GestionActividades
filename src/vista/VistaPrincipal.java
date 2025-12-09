@@ -72,6 +72,8 @@ public class VistaPrincipal extends JFrame {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
+
+
         // Formulario
         JPanel form = new JPanel(new GridLayout(3, 4, 10, 10));
         form.setBorder(bordeTitulo("Datos Personales"));
@@ -147,6 +149,7 @@ public class VistaPrincipal extends JFrame {
         modeloAdultos.addColumn("Fono"); 
         
         tablaAdultos = new JTable(modeloAdultos);
+        tablaAdultos.setDefaultEditor(Object.class, null);
         centro.add(new JScrollPane(tablaAdultos), BorderLayout.CENTER);
 
         // Botón Eliminar
