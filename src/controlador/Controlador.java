@@ -50,7 +50,7 @@ public class Controlador {
         }
 
         String nombre = this.vistaPrincipal.txtAdultoNombre.getText();
-        if(nombre == null || nombre.isEmpty()){
+        if(nombre == null || nombre.trim().isEmpty()){
             vista.PopUps.ERROR("Nombre Invalido: ",new Exception("El nombre ingresado no es valido."));
             this.vistaPrincipal.txtAdultoNombre.setText("");
             this.vistaPrincipal.txtAdultoNombre.requestFocus();
