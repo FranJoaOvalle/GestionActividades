@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
+import java.util.ArrayList;
 
 public class Controlador {
     GestionAdultosMayores gestionAdultosMayores;
@@ -20,6 +21,7 @@ public class Controlador {
     GestionInscripcion gestionInscripcion;
     VistaPrincipal vistaPrincipal;
     private String rutSeleccionado;
+    private ArrayList<AdultoMayor> ultimaListaMostrada = new ArrayList<>();
 
     public Controlador(GestionAdultosMayores gestionAdultosMayores, GestionActividades gestionActividades, GestionInscripcion gestionInscripcion, VistaPrincipal vistaPrincipal) {
         this.gestionAdultosMayores = gestionAdultosMayores;
@@ -32,10 +34,10 @@ public class Controlador {
     public void botones(){
         this.vistaPrincipal.btnAdultoGuardar.addActionListener(e -> this.agregarAdultoMayor());
         this.vistaPrincipal.btnAdultoLimpiar.addActionListener(e -> this.limpiarFormularioAdultoMayor());
-        this.vistaPrincipal.btnAdultoListar.addActionListener(e -> this.listarAdultosMayores());
+        this.vistaPrincipal.btnAdultoListar.addActionListener(e -> this.listarAdultosMayores(this.gestionAdultosMayores.getAdultosMayores()));
         this.vistaPrincipal.btnAdultoEliminar.addActionListener(e -> eliminarAdultoMayor(rutSeleccionado));
         this.vistaPrincipal.btnAdultoEditar.addActionListener(e -> actualizarAdultoMayor(rutSeleccionado));
-
+        this.vistaPrincipal.btnAdultoBuscar.addActionListener(e -> buscarAdultoMayor());
     }
 
     private void agregarAdultoMayor(){
@@ -108,12 +110,15 @@ public class Controlador {
         this.vistaPrincipal.txtAdultoEncargado.setText("");
         this.vistaPrincipal.txtAdultoFono.setText("");
         this.vistaPrincipal.txtAdultoRut.requestFocus();
+        this.vistaPrincipal.btnAdultoGuardar.setEnabled(true);
     }
 
-    private void listarAdultosMayores(){
+    private void listarAdultosMayores(ArrayList<AdultoMayor> adultos){
+        ultimaListaMostrada = adultos;
+
         DefaultTableModel m = (DefaultTableModel) this.vistaPrincipal.tablaAdultos.getModel();
         m.setNumRows(0);
-        for(AdultoMayor a: this.gestionAdultosMayores.getAdultosMayores()){
+        for(AdultoMayor a: adultos){
             String fechaFormateada = a.getNacimiento().format(utils.Fechas.DATE_CL);
             m.addRow(new Object[] {a.getRut(),a.getNombreAdultoMayor(),a.getApellidoAdultoMayor(),fechaFormateada,a.getNombreEncargado(),a.getContactoEncargado()});
         }
@@ -123,8 +128,8 @@ public class Controlador {
 
         this.vistaPrincipal.tablaAdultos.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e){
 
+            public void mouseClicked(MouseEvent e){
                 int fila = vistaPrincipal.tablaAdultos.getSelectedRow();
 
                 if(fila == -1){
@@ -138,6 +143,7 @@ public class Controlador {
                 }
 
                 if(e.getClickCount() == 2) {
+                    vistaPrincipal.btnAdultoGuardar.setEnabled(false);
 
                     AdultoMayor adulto = gestionAdultosMayores.buscarAdultoMayorPorRut(rutSeleccionado);
 
@@ -160,7 +166,13 @@ public class Controlador {
     private void eliminarAdultoMayor(String rut){
         AdultoMayor adulto = gestionAdultosMayores.buscarAdultoMayorPorRut(rut);
         gestionAdultosMayores.eliminarAdultoMayor(adulto);
-        listarAdultosMayores();
+
+        if(ultimaListaMostrada != null){
+            ultimaListaMostrada.removeIf(a -> a.getRut().equals(rut));
+            listarAdultosMayores(ultimaListaMostrada);
+        }else{
+            listarAdultosMayores(gestionAdultosMayores.getAdultosMayores());
+        }
     }
 
     private void actualizarAdultoMayor(String rut){
@@ -214,6 +226,50 @@ public class Controlador {
         if(gestionAdultosMayores.actualizarAdultoMayor(antiguosDatos,nuevosDatos)){
             vista.PopUps.GENERICO("Adulto Mayor Actualizado con exito.", "Exito");
         }
-        listarAdultosMayores();
+        for(int i = 0; i < ultimaListaMostrada.size(); i++){
+            if(ultimaListaMostrada.get(i).getRut().equals(rut)){
+                ultimaListaMostrada.set(i,nuevosDatos);
+                break;
+            }
+        }
+
+        listarAdultosMayores(ultimaListaMostrada);
+    }
+
+    private void buscarAdultoMayor(){
+        String dato = vistaPrincipal.txtAdultoBuscar.getText();
+
+        if(dato == null || dato.trim().isEmpty()){
+            vista.PopUps.ERROR("Vacio: ", new Exception("Ingrese información"));
+            return;
+        }
+
+        AdultoMayor porRut = gestionAdultosMayores.buscarAdultoMayorPorRut(dato);
+        if(porRut != null) {
+            ArrayList<AdultoMayor> lista = new ArrayList<>();
+            lista.add(porRut);
+            listarAdultosMayores(lista);
+            return;
+        }
+
+        ArrayList<AdultoMayor> porEncargado = gestionAdultosMayores.buscarAdultoMayorPorNombreEncargado(dato);
+        if(porEncargado != null && !porEncargado.isEmpty()) {
+            listarAdultosMayores(porEncargado);
+            return;
+        }
+
+        ArrayList<AdultoMayor> porApellido = gestionAdultosMayores.buscarAdultoMayorPorApellido(dato);
+        if(porApellido != null && !porApellido.isEmpty()) {
+            listarAdultosMayores(porApellido);
+            return;
+        }
+
+        ArrayList<AdultoMayor> porNombre = gestionAdultosMayores.buscarAdultoMayorPorNombre(dato);
+        if(porNombre != null && !porNombre.isEmpty()) {
+            listarAdultosMayores(porNombre);
+            return;
+        }
+
+        vista.PopUps.ERROR("Sin resultados: ", new Exception("No se encontraron resultados para la búsqueda realizada."));
     }
 }
