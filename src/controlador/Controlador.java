@@ -91,10 +91,12 @@ public class Controlador {
             this.vistaPrincipal.txtAdultoFono.requestFocus();
             return;
         }
-
-        this.gestionAdultosMayores.agregarAdultoMayor(new AdultoMayor(rut,nombre,apellido,nacimiento2,encargado,contactoEncargado));
-        vista.PopUps.GENERICO("Adulto Mayor ingresado con exito.","Adulto Mayor Valido");
-        this.limpiarFormularioAdultoMayor();
+        if(this.gestionAdultosMayores.agregarAdultoMayor(new AdultoMayor(rut,nombre,apellido,nacimiento2,encargado,contactoEncargado))){
+            vista.PopUps.GENERICO("Adulto Mayor ingresado con exito.","Adulto Mayor Valido");
+            this.limpiarFormularioAdultoMayor();
+        }else{
+            vista.PopUps.ERROR("RUT Invalido: ",new Exception("El Rut Ya Existe."));
+        }
     }
 
     private void limpiarFormularioAdultoMayor(){
