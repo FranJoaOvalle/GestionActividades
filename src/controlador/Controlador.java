@@ -88,7 +88,7 @@ public class Controlador {
 
         String contactoEncargado = this.vistaPrincipal.txtAdultoFono.getText();
         if(contactoEncargado == null || contactoEncargado.trim().isEmpty()){
-            vista.PopUps.ERROR("Fono Encargado Invalido: ", new Exception("El fono del encargado imgresado no es valido."));
+            vista.PopUps.ERROR("Fono Encargado Invalido: ", new Exception("El fono del encargado ingresado no es valido."));
             this.vistaPrincipal.txtAdultoFono.setText("");
             this.vistaPrincipal.txtAdultoFono.requestFocus();
             return;
@@ -96,6 +96,7 @@ public class Controlador {
         if(this.gestionAdultosMayores.agregarAdultoMayor(new AdultoMayor(rut,nombre,apellido,nacimiento2,encargado,contactoEncargado))){
             vista.PopUps.GENERICO("Adulto Mayor ingresado con exito.","Adulto Mayor Valido");
             this.limpiarFormularioAdultoMayor();
+            listarAdultosMayores(this.gestionAdultosMayores.getAdultosMayores());
         }else{
             vista.PopUps.ERROR("RUT Invalido: ",new Exception("El Rut Ya Existe."));
         }
@@ -215,7 +216,7 @@ public class Controlador {
 
         String contactoEncargado = this.vistaPrincipal.txtAdultoFono.getText();
         if(contactoEncargado == null || contactoEncargado.trim().isEmpty()){
-            vista.PopUps.ERROR("Fono Encargado Invalido: ", new Exception("El fono del encargado imgresado no es valido."));
+            vista.PopUps.ERROR("Fono Encargado Invalido: ", new Exception("El fono del encargado ingresado no es valido."));
             this.vistaPrincipal.txtAdultoFono.setText("");
             this.vistaPrincipal.txtAdultoFono.requestFocus();
             return;
